@@ -30,6 +30,27 @@ function HootDetails() {
   return (
     <div>
         <h1>Hoot Details</h1>
+
+        { hoot ? 
+        (<>
+            <h2>{hoot.title}</h2>
+            <p>{hoot.text}</p>
+            <p>By: <b>{hoot.author.username}</b></p>
+            <button>Delete</button>
+
+            <h3>Comments:</h3>
+            {hoot.comments.map((oneComment)=>
+            <div key={oneComment._id}>
+                <p>{oneComment.text}</p>
+                <p>By: {oneComment.author.username}</p>
+            </div>
+            )}
+        </>) 
+        : 
+        (<>
+            <p>Loading...</p>
+        </>)
+        }
     </div>
   )
 }
