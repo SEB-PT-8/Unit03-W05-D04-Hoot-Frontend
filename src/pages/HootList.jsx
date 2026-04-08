@@ -38,6 +38,8 @@ function HootList() {
         </div>
         )}
 
+        {hoots.length===0 && <h2>No Hoots Available</h2>}
+
     </div>
   )
 }

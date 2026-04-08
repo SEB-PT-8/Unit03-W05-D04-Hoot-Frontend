@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import HootList from './pages/HootList';
 import HootDetails from './pages/HootDetails';
+import CreateHoot from './pages/CreateHoot';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -34,7 +35,8 @@ function App() {
         <Route path="/sign-in" element={!user ? <SignIn setUser={setUser} /> : <Navigate to='/dashboard'/>} />
         <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to='/sign-in'/>} />
         <Route path='/hoots' element={<HootList/>}/>
-        <Route path='/hoots/:id' element={<HootDetails/>}/>
+        <Route path='/hoots/:id' element={<HootDetails user={user}/>}/>
+        <Route path='/hoots/create' element={<CreateHoot/>}/>
 
       </Routes>
     </div>

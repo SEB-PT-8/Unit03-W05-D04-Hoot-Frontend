@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 // Steps
 // 1. get the id from the URL using useParams()
 // 2. create a function to make an axios call to get the 1 hoot with the id from step 1 and set the state
@@ -8,10 +8,11 @@ import { useParams } from 'react-router'
 // 4. show the state on the page
 
 
-function HootDetails() {
+function HootDetails({ user }) {
     const [hoot, setHoot] = useState(null)
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     async function getOneHoot(){
         try{
@@ -20,6 +21,18 @@ function HootDetails() {
         }
         catch(err){
             console.log(err)
+        }
+    }
+
+    async function deleteHoot(){
+        try{
+            const token = localStorage.getItem('token')
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/hoots/${id}`,{headers:{Authorization: `Bearer ${token}`}})
+            navigate('/hoots')
+        }
+        catch(err){
+            console.log(err)
+
         }
     }
 
@@ -36,7 +49,10 @@ function HootDetails() {
             <h2>{hoot.title}</h2>
             <p>{hoot.text}</p>
             <p>By: <b>{hoot.author.username}</b></p>
-            <button>Delete</button>
+            {user?._id === hoot.author._id ? (
+                <button onClick={deleteHoot}>Delete</button>
+                ) : <></>}
+            
 
             <h3>Comments:</h3>
             {hoot.comments.map((oneComment)=>
