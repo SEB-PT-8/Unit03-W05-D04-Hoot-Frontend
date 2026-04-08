@@ -11,6 +11,7 @@ function UpdateHoot() {
     })
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     async function getHoot(){
         const foundHoot = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/hoots/${id}`)

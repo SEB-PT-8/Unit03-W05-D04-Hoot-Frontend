@@ -1,11 +1,14 @@
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+
 
 function Navbar({ user, setUser }) {
+  const navigate = useNavigate()
 
 
   function logOut(){
     localStorage.removeItem('token')
     setUser(null)
+    navigate('/')
   }
 
   return (
@@ -19,6 +22,7 @@ function Navbar({ user, setUser }) {
         // Links for protected routes only for logged in users
         <>
         <Link className='nav-item' to='/dashboard'>Dashboard</Link>
+        <Link className='nav-item' to='/hoots/create'>Create Hoot</Link>
 
         <span className='nav-item'>{user.username}</span>
        
