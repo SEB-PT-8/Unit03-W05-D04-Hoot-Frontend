@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react'
 import axios from 'axios'
-import { useParams, useNavigate } from 'react-router'
+import { useParams, useNavigate, Link } from 'react-router'
 // Steps
 // 1. get the id from the URL using useParams()
 // 2. create a function to make an axios call to get the 1 hoot with the id from step 1 and set the state
@@ -50,7 +50,11 @@ function HootDetails({ user }) {
             <p>{hoot.text}</p>
             <p>By: <b>{hoot.author.username}</b></p>
             {user?._id === hoot.author._id ? (
+                <>
                 <button onClick={deleteHoot}>Delete</button>
+                <Link to={`/hoots/edit/${id}`}>Edit</Link>
+
+                </>
                 ) : <></>}
             
 

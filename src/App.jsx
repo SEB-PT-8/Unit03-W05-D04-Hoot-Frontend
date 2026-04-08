@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import HootList from './pages/HootList';
 import HootDetails from './pages/HootDetails';
 import CreateHoot from './pages/CreateHoot';
+import UpdateHoot from './pages/UpdateHoot';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,6 +38,7 @@ function App() {
         <Route path='/hoots' element={<HootList/>}/>
         <Route path='/hoots/:id' element={<HootDetails user={user}/>}/>
         <Route path='/hoots/create' element={<CreateHoot/>}/>
+        <Route path='/hoots/edit/:id' element={<UpdateHoot/>}/>
 
       </Routes>
     </div>
